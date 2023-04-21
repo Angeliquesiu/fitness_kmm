@@ -1,0 +1,26 @@
+CREATE TABLE exerciseEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    lastEdited INTEGER NOT NULL
+);
+
+getAllExercises:
+SELECT * FROM exerciseEntity;
+
+getExerciseById:
+SELECT * FROM exerciseEntity
+WHERE id = ?;
+
+insertExercise:
+INSERT OR REPLACE
+INTO exerciseEntity(
+    id,
+    title,
+    description,
+    lastEdited
+) VALUES (?, ?, ?, ?);
+
+deleteExerciseById:
+DELETE FROM exerciseEntity
+WHERE id = ?;

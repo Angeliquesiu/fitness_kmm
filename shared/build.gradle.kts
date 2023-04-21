@@ -65,6 +65,13 @@ kotlin {
     }
 }
 
+sqldelight {
+    database("FitnessWrapsDatabase") {
+        packageName = "com.example.fitnesswraps.database"
+        sourceFolders = listOf("sqldelight")
+    }
+}
+
 android {
     namespace = "com.example.fitnesswraps"
     compileSdk = 33
