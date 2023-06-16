@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.fitnesswraps.domain.exercise.Exercise
 import com.example.fitnesswraps.domain.exercise.ExerciseDataSource
 import com.example.fitnesswraps.domain.exercise.SearchExercises
+import com.example.fitnesswraps.domain.time.DateTimeUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -32,6 +33,19 @@ class ExerciseListViewModel @Inject constructor(
             isSearchActive = isSearchActive
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ExerciseListState())
+
+    init {
+        viewModelScope.launch {
+            exerciseDataSource.insertExercise(
+                Exercise(
+                    id = null,
+                    title = "Exercise sample",
+                    description = "Exercise description",
+                    lastEdited = DateTimeUtil.now()
+                )
+            )
+        }
+    }
 
     fun loadExercises() {
         viewModelScope.launch {
