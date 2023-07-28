@@ -34,19 +34,6 @@ class ExerciseListViewModel @Inject constructor(
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ExerciseListState())
 
-    init {
-        viewModelScope.launch {
-            exerciseDataSource.insertExercise(
-                Exercise(
-                    id = null,
-                    title = "Exercise sample",
-                    description = "Exercise description",
-                    lastEdited = DateTimeUtil.now()
-                )
-            )
-        }
-    }
-
     fun loadExercises() {
         viewModelScope.launch {
             savedStateHandle["exercises"] = exerciseDataSource.getAllExercises()

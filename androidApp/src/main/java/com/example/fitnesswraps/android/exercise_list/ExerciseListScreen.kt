@@ -29,10 +29,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ExerciseListScreen(
+    navController: NavController,
     viewModel: ExerciseListViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
@@ -44,7 +46,9 @@ fun ExerciseListScreen(
     Scaffold (
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.navigate("exercise_detail/-1L")
+                },
                 backgroundColor = Color.Black
             ) {
                 Icon(
@@ -97,7 +101,7 @@ fun ExerciseListScreen(
                         exercise = exercise,
                         backgroundColor = Color.LightGray,
                         onNoteClick = {
-
+                            navController.navigate("exercise_detail/${exercise.id}")
                         },
                         onDeleteClick = { viewModel.deleteNoteById(exercise.id!!) },
                         modifier = Modifier
